@@ -1,0 +1,42 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/python-3
+{
+  "name": "ESET MSP Tool (Internal)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "PYTHON_VERSION": "3.11",
+      "INSTALL_PYTHON_TOOLS": "false"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "[python]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": null,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+          }
+        },
+        "python.formatting.provider": "black",
+        "python.formatting.blackArgs": ["--line-length", "99"],
+        "isort.args": ["--profile", "black"],
+        "python.linting.mypyEnabled": true,
+        "python.linting.mypyArgs": ["--show-column-numbers"],
+        "python.linting.pydocstyleEnabled": false,
+        "python.linting.pylintEnabled": false,
+        "python.languageServer": "Pylance",
+        "python.defaultInterpreterPath": "/usr/local/python/bin/python"
+      },
+      "extensions": ["ms-python.python", "ms-python.vscode-pylance", "ms-python.isort"]
+    }
+  },
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "pip install -r requirements.txt -r requirements-dev.txt",
+  "remoteUser": "vscode"
+}
