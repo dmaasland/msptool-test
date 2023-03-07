@@ -2,7 +2,7 @@
 BASE_URL = "https://mspapi.eset.com"
 API_BASE = "/api"
 HTTP_TIMEOUT = 60
-HTTP_LIMIT = 25
+HTTP_LIMIT = 10
 
 # Billing Report
 BILLING_REPORT_BASE = f"{API_BASE}/BillingReport"
