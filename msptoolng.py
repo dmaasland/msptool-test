@@ -64,7 +64,7 @@ def split_customers() -> list[list[str]]:
     ]
 
 
-def get_dates() -> tuple[str, str]:
+def get_dates() -> tuple[str, str, str, str]:
     last_month = datetime.today().replace(day=1) - timedelta(days=1)
     year = last_month.strftime("%Y")
     month = last_month.strftime("%m")
@@ -74,14 +74,14 @@ def get_dates() -> tuple[str, str]:
     from_date = f"{year}-{month}-{first_day}"
     to_date = f"{year}-{month}-{last_day}"
 
-    return from_date, to_date
+    return from_date, to_date, year, month
 
 
 async def main() -> None:
-    from_date, to_date = get_dates()
+    from_date, to_date, year, month = get_dates()
 
     async with EsetMspAdministrator2(username=USERNAME, password=PASSWORD, verify=False) as ema:
-        my_company = await ema.billing_report_my_company(2023, 2)
+        my_company = await ema.billing_report_my_company(int(year), int(month))
 
         async with asyncio.TaskGroup() as tg:
             for report in my_company.report:
